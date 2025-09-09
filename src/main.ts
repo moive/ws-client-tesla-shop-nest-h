@@ -4,7 +4,8 @@ import "./style.css";
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <h1>Websocket - Client</h1>
-    <span>offlilne</span>
+    <span id="server-status">offlilne</span>
+    <ul id="clients-ul"></ul>
   </div>
 `;
 connectToServer();
