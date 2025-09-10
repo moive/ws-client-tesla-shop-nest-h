@@ -1,8 +1,12 @@
 import { Manager, Socket } from "socket.io-client";
 
-export const connectToServer = () => {
+export const connectToServer = (token: string) => {
   const url = "http://localhost:3000/socket.io/socket.io.js";
-  const manager = new Manager(url);
+  const manager = new Manager(url, {
+    extraHeaders: {
+      authentication: token,
+    },
+  });
 
   const socket = manager.socket("/");
   addListeners(socket);
@@ -27,7 +31,7 @@ const addListeners = (socket: Socket) => {
     let clientsHtml = "";
     clients.forEach((clientId) => {
       clientsHtml += `
-        <li>${clientId}</li>
+        <li class="list-group-item">${clientId}</li>
       `;
     });
     clientsUl.innerHTML = clientsHtml;
